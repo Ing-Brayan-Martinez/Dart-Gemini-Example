@@ -38,6 +38,8 @@ dependencies:
   url_launcher: ^6.3.0
   google_generative_ai: ^0.4.3
   flutter_markdown: ^0.7.2
+  get: ^4.6.6
+  page_transition: ^2.1.0
 
 dev_dependencies:
   flutter_test:
