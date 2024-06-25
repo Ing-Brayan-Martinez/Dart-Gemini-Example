@@ -25,9 +25,10 @@ class GenerativeAISample extends StatelessWidget {
   ThemeData _lightTheme() {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
-        brightness: Brightness.dark,
+        brightness: Brightness.light,
         seedColor: const Color.fromARGB(255, 171, 222, 244),
         surface: Colors.white,
+        onPrimary: const Color(0xFF0C298B),
       ),
       useMaterial3: true,
     );
@@ -46,7 +47,7 @@ class GenerativeAISample extends StatelessWidget {
       //chat
       case ChatScreen.routeName:
         return PageTransition(
-          child: const ChatScreen(title: 'Flutter + Generative AI'),
+          child: const ChatScreen(),
           type: PageTransitionType.bottomToTop,
           settings: settings,
         );

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dart_gemini_example/domain/config/enums.dart';
 import 'package:dart_gemini_example/domain/config/type_helper.dart';
+import 'package:dart_gemini_example/domain/controller/api_key_controller.dart';
 import 'package:dart_gemini_example/domain/controller/splash_controller.dart';
 import 'package:dart_gemini_example/domain/model/device.dart';
 import 'package:dart_gemini_example/presentation/screen/api_key_screen.dart';
@@ -33,6 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     _heightBottom2 = 0;
     //
     Get.put(SplashController());
+    Get.put(ApiKeyController());
   }
 
   @override
@@ -128,21 +130,14 @@ class _SplashScreenState extends State<SplashScreen> {
                 return StreamBuilder<Device>(
                   stream: result.status,
                   builder: (context, AsyncSnapshot<Device> snapshot) {
-                    //Si esta esperando data para el stream
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return _buildLoadingWidget(context);
-
-                      //Si hay data en el stream
                     } else if (snapshot.connectionState ==
                             ConnectionState.active &&
                         !snapshot.hasError) {
                       return _buildDataWidget(context, snapshot.data!);
-
-                      //Si hay un error en el stream
                     } else if (snapshot.hasError) {
                       return _buildErrorWidget(context, snapshot.error);
-
-                      //Si se completo el stream
                     } else if (snapshot.connectionState ==
                         ConnectionState.done) {
                       return _buildCompleteWidget(context);
@@ -202,7 +197,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Widget _buildDataWidget(BuildContext context, Device data) {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 3), () {
       switch (data.status) {
         case DeviceStatus.chat:
           Navigator.of(context).pushNamedAndRemoveUntil(
