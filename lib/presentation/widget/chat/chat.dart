@@ -1,5 +1,6 @@
 import 'package:dart_gemini_example/presentation/widget/chat/message.dart';
 import 'package:dart_gemini_example/presentation/widget/textfield/textfield.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 
@@ -15,8 +16,10 @@ class ChatWidget extends StatefulWidget {
 class _ChatWidgetState extends State<ChatWidget> {
   late final GenerativeModel _model;
   late final ChatSession _chat;
+
   final ScrollController _scrollController = ScrollController();
   final TextEditingController _textController = TextEditingController();
+
   final FocusNode _textFieldFocus = FocusNode(debugLabel: 'TextField');
   bool _loading = false;
 
@@ -24,7 +27,7 @@ class _ChatWidgetState extends State<ChatWidget> {
   void initState() {
     super.initState();
     _model = GenerativeModel(
-      model: 'gemini-1.5-pro',
+      model: 'gemini-1.5-flash-latest',
       apiKey: widget.apiKey,
     );
     _chat = _model.startChat();
@@ -143,6 +146,9 @@ class _ChatWidgetState extends State<ChatWidget> {
   }
 
   void _showError(String message) {
+    if (kDebugMode) {
+      print(message);
+    }
     showDialog<void>(
       context: context,
       builder: (context) {
