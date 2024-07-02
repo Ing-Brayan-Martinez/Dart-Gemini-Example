@@ -26,7 +26,7 @@ class GenerativeAISample extends StatelessWidget {
     return ThemeData(
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.light,
-        seedColor: const Color.fromARGB(255, 171, 222, 244),
+        seedColor: const Color(0xFF0C298B),
         surface: Colors.white,
         onPrimary: const Color(0xFF0C298B),
       ),
